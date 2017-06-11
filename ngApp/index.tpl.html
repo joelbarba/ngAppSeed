@@ -14,7 +14,7 @@
     <!-- bower:css -->
     <!-- endbower -->
 
-    <link href="styles/app.css" rel="stylesheet" type="text/css">
+    <!-- include: "type": "css", "files": "styles/*.css" -->
   <!-- endbuild -->
 
 </head>
@@ -46,24 +46,15 @@
 
   <!-- build:js(.) scripts/fullApp.js -->
     <!-- bower:js -->
-    <script src="bower_components/jquery/dist/jquery.js"></script>
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-route/angular-route.js"></script>
-    <script src="bower_components/angular-loader/angular-loader.js"></script>
-    <script src="bower_components/angular-mocks/angular-mocks.js"></script>
-    <script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
-    <script src="bower_components/angularUtils-pagination/dirPagination.js"></script>
     <!-- endbower -->
 
-    <script src="app.js"></script>
+    <!-- include: "type": "js", "files": "app.js" -->
 
-    <script src="views/view1/view1.js"></script>
-    <script src="views/view2/view2.js"></script>
+    <!-- include: "type": "js", "files": ["views/**/*.js", "!*_test.js"] -->
 
-    <script src="components/version/version.js"></script>
-    <script src="components/version/version-directive.js"></script>
-    <script src="components/version/interpolate-filter.js"></script>
+    <!-- include: "type": "js", "files": "components/version/version.js" -->
+    <!-- include: "type": "js", "files": "components/version/version-directive.js" -->
+    <!-- include: "type": "js", "files": "components/version/interpolate-filter.js" -->
 
   <!-- endbuild -->
 

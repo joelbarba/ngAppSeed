@@ -1,0 +1,28 @@
+.btn {
+  cursor: pointer;
+
+  &.btn-icon {
+    padding: 0px;
+    background: $primary_color;
+    color: $primary_color_invert;
+    @include border_radius(4);
+  }
+
+  .btn-text-section {
+    float: left;
+    font-size:13px;
+    font-weight:500;
+    letter-spacing: 1px;
+    padding: 8px 16px 6px;
+  }
+
+  .btn-icon-section {
+    height: 32px;
+    float: left;
+    padding: 6px 10px 5px 12px;
+    font-size: 18px;
+    background:darken($primary_color, 5%);
+  }
+}
+
+
