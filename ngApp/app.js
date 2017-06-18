@@ -5,7 +5,11 @@ angular.module('myApp', [
   'ngRoute',
   'myApp.view1',
   'myApp.view2',
+  'myApp.view3',
   'myApp.version'
+  , 'myApp.jDirectives'
+  , 'ui.bootstrap'
+  , 'angularUtils.directives.dirPagination'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');

@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-xs-12">
-    <h1>Page XXX 1</h1>
+    <h1>Page number 1</h1>
   </div>
 </div>
 
@@ -9,7 +9,7 @@
 
     <div class="row">
       <div class="col-xs-12">
-        <h3>List of XXXX</h3>
+        <h3>List of Items</h3>
       </div>
 
       <!-- Search box -->
@@ -26,14 +26,12 @@
           <!--<span>Add Item</span>-->
         <!--</button>-->
 
-        <button class="btn btn-icon" ng-click="openAddItemModal()">
+        <button class="btn btn-icon" ng-click="openItemModal('add')">
           <span class="btn-text-section">Add Item</span>
           <span class="btn-icon-section">
             <span class="glyphicon glyphicon-plus"></span>
           </span>
         </button>
-
-
       </div>
 
 
@@ -51,14 +49,15 @@
             </div>
           </li>
 
-          <li ng-repeat="item in itemList" class="btn-row">
+
+          <li class="btn-row" dir-paginate="item in itemList | filter: searchBox | itemsPerPage: 8" pagination-id="cust">
             <div class="row">
               <div class="col-xs-2 row-text"><span>{{item.id}}</span></div>
               <div class="col-xs-3 row-text"><span>{{item.name}}</span></div>
               <div class="col-xs-4 row-text"><span>{{item.desc}}</span></div>
 
               <div class="col-xs-3 text-right">
-                <button class="btn btn-icon" ng-click="openAddItemModal()">
+                <button class="btn btn-icon" ng-click="openItemModal('edit')">
                   <span class="btn-text-section">Edit</span>
                   <span class="btn-icon-section">
                     <span class="glyphicon glyphicon-pencil"></span>
@@ -71,6 +70,11 @@
 
         </ul>
       </div>
+
+      <div class="col-xs-12">
+        <dir-pagination-controls pagination-id="cust"></dir-pagination-controls>
+      </div>
+
     </div>
 
   </div>

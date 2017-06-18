@@ -20,12 +20,7 @@
 </head>
 <body>
   <div class="container-fluid">
-
-    <!--Menu-->
-    <ul class="menu">
-      <li><a href="#!/view1">view1</a></li>
-      <li><a href="#!/view2">view3</a></li>
-    </ul>
+    <div navbar></div>
 
     <!--[if lt IE 7]>
         <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -50,11 +45,9 @@
 
     <!-- include: "type": "js", "files": "app.js" -->
 
-    <!-- include: "type": "js", "files": ["views/**/*.js", "!*_test.js"] -->
+    <!-- include: "type": "js", "files": ["views/**/*.js", "views/**/!*_test.js"] -->
 
-    <!-- include: "type": "js", "files": "components/version/version.js" -->
-    <!-- include: "type": "js", "files": "components/version/version-directive.js" -->
-    <!-- include: "type": "js", "files": "components/version/interpolate-filter.js" -->
+    <!-- include: "type": "js", "files": ["components/**/*.js", "!components/**/*test.js"] -->
 
   <!-- endbuild -->
 

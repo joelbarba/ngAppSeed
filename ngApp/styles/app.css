@@ -7341,6 +7341,7 @@ button.close {
   padding: 0px;
   background: #337ab7;
   color: #FFFFFF;
+  border: 1px solid #285f8f;
   -webkit-border-radius: 4;
   -moz-border-radius: 4;
   border-radius: 4;
@@ -7358,6 +7359,27 @@ button.close {
   padding: 6px 10px 5px 12px;
   font-size: 18px;
   background: #2d6da3;
+}
+.btn.btn-icon-save {
+  background: #5cb85c;
+  border: 1px solid #449d44;
+}
+.btn.btn-icon-save .btn-icon-section {
+  background: #4cae4c;
+}
+.btn.btn-icon-cancel {
+  background: #f0ad4e;
+  border: 1px solid #ec971f;
+}
+.btn.btn-icon-cancel .btn-icon-section {
+  background: #eea236;
+}
+.btn.btn-icon-delete {
+  background: #d9534f;
+  border: 1px solid #c9302c;
+}
+.btn.btn-icon-delete .btn-icon-section {
+  background: #d43f3a;
 }
 
 ul.table-list {
@@ -7412,6 +7434,19 @@ ul.table-list > li.btn-row .btn-icon .btn-icon-section {
 
 body {
   background: #f5f5f5;
+}
+body .navbar {
+  border-radius: 0;
+  background: #9fc4e4;
+}
+body .navbar .navbar-header {
+  width: 100%;
+}
+body .navbar .navbar-brand {
+  padding: 6px;
+}
+body .navbar .navbar-brand img {
+  width: 42px;
 }
 
 .clickable {

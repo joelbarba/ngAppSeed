@@ -2,5 +2,6 @@
 .idea/
 node_modules
 bower_components
-./env
-./flask
+env
+flask
+.sass-cache
