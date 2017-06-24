@@ -4,21 +4,21 @@ from flask import Flask, jsonify, abort, make_response, request
 STATIC_FOLDER = 'ngApp'
 app = Flask(__name__, static_folder=STATIC_FOLDER)
 
-
-
-tasks = [
-    {
-        'id': 1,
-        'title': u'Buy groceries',
-        'description': u'Milk, Cheese, Pizza, Fruit, Tylenol', 
-        'done': False
-    },
-    {
-        'id': 2,
-        'title': u'Learn Python',
-        'description': u'Need to find a good Python tutorial on the web', 
-        'done': False
-    }
+items = [
+    { 'id':  1, 'name': 'First',  'desc': 'The first element' },
+    { 'id':  2, 'name': 'Second', 'desc': 'The second element' },
+    { 'id':  3, 'name': 'Third',  'desc': 'The third element' },
+    { 'id':  4, 'name': 'Fourth', 'desc': 'The last element' },
+    { 'id':  5, 'name': 'Fourth', 'desc': 'The last element' },
+    { 'id':  6, 'name': 'Fourth', 'desc': 'The last element' },
+    { 'id':  7, 'name': 'Fourth', 'desc': 'The last element' },
+    { 'id':  8, 'name': 'Fourth', 'desc': 'The last element' },
+    { 'id':  9, 'name': 'Fourth', 'desc': 'The last element' },
+    { 'id': 10, 'name': 'Fourth', 'desc': 'The last element' },
+    { 'id': 11, 'name': 'Fourth', 'desc': 'The last element' },
+    { 'id': 12, 'name': 'Fourth', 'desc': 'The last element' },
+    { 'id': 13, 'name': 'Fourth', 'desc': 'The last element' },
+    { 'id': 14, 'name': 'Fourth', 'desc': 'The last element' }
 ]
 
 @app.route('/test')
@@ -38,63 +38,60 @@ def not_found(error):
     return make_response(jsonify({'error': 'Not found'}), 404)
 
 
-# Retrieve the list of tasks
-@app.route('/todo/api/v1.0/tasks', methods=['GET'])
-def get_tasks():
-    return jsonify({'tasks': tasks})
+# Retrieve the list of items
+@app.route('/api/v1.0/items', methods=['GET'])
+def get_items():
+    return jsonify({'items': items})
 
 
-# Retrieve the info of the requested task
-@app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['GET'])
-def get_task(task_id):
-    task = [task for task in tasks if task['id'] == task_id]
-    if len(task) == 0:
+# Retrieve the info of the requested item
+@app.route('/api/v1.0/items/<int:item_id>', methods=['GET'])
+def get_item(item_id):
+    item = [item for item in items if item['id'] == item_id]
+    if len(item) == 0:
         abort(404)
-    return jsonify({'task': task[0]})
+    return jsonify({'item': item[0]})
 
 
-# Create a new task
-@app.route('/todo/api/v1.0/tasks', methods=['POST'])
-def create_task():
-    if not request.json or not 'title' in request.json:
+# Create a new item
+@app.route('/api/v1.0/items', methods=['POST'])
+def create_item():
+    if not request.json or not 'name' in request.json:
         abort(400)
-    task = {
-        'id': tasks[-1]['id'] + 1,
-        'title': request.json['title'],
-        'description': request.json.get('description', ""),
-        'done': False
+    item = {
+        'id': items[-1]['id'] + 1,
+        'name': request.json['name'],
+        'desc': request.json.get('desc', "")
     }
-    tasks.append(task)
-    return jsonify({'task': task}), 201
+    items.append(item)
+    return jsonify({'item': item}), 201
 
 
-# Delete an existing task
-@app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['DELETE'])
-def delete_task(task_id):
-    task = [task for task in tasks if task['id'] == task_id]
-    if len(task) == 0:
+# Delete an existing item
+@app.route('/api/v1.0/items/<int:item_id>', methods=['DELETE'])
+def delete_item(item_id):
+    item = [item for item in items if item['id'] == item_id]
+    if len(item) == 0:
         abort(404)
-    tasks.remove(task[0])
+    items.remove(item[0])
     return jsonify({'result': True})
 
-# Update an existing task
-@app.route('/todo/api/v1.0/tasks/<int:task_id>', methods=['PUT'])
-def update_task(task_id):
-    task = [task for task in tasks if task['id'] == task_id]
-    if len(task) == 0:
+# Update an existing item
+@app.route('/api/v1.0/items/<int:item_id>', methods=['PUT', 'POST'])
+def update_item(item_id):
+    item = [item for item in items if item['id'] == item_id]
+    if len(item) == 0:
         abort(404)
     if not request.json:
         abort(400)
-    if 'title' in request.json and type(request.json['title']) != unicode:
+    if 'name' in request.json and type(request.json['name']) != unicode:
         abort(400)
-    if 'description' in request.json and type(request.json['description']) is not unicode:
+    if 'desc' in request.json and type(request.json['desc']) is not unicode:
         abort(400)
-    if 'done' in request.json and type(request.json['done']) is not bool:
-        abort(400)
-    task[0]['title'] = request.json.get('title', task[0]['title'])
-    task[0]['description'] = request.json.get('description', task[0]['description'])
-    task[0]['done'] = request.json.get('done', task[0]['done'])
-    return jsonify({'task': task[0]})
+
+    item[0]['name'] = request.json.get('name', item[0]['name'])
+    item[0]['desc'] = request.json.get('desc', item[0]['desc'])
+    return jsonify({'item': item[0]})
 
 
 if __name__ == '__main__':

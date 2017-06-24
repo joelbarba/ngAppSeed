@@ -10,6 +10,7 @@ angular.module('myApp', [
   , 'myApp.jDirectives'
   , 'ui.bootstrap'
   , 'angularUtils.directives.dirPagination'
+  , 'ngResource'
 ]).
 config(['$locationProvider', '$routeProvider', function($locationProvider, $routeProvider) {
   $locationProvider.hashPrefix('!');

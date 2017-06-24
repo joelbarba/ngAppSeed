@@ -9,39 +9,68 @@ angular.module('myApp.view1', ['ngRoute'])
   });
 }])
 
-.controller('View1Ctrl', function($scope, $uibModal) {
+.controller('View1Ctrl', function($scope, $uibModal, $resource) {
   "ngInject";
 
-  $scope.title = 'eeee';
-  $scope.itemList = [
-    { id:  1, name: 'First',  desc: 'The first element' },
-    { id:  2, name: 'Second', desc: 'The second element' },
-    { id:  3, name: 'Third',  desc: 'The third element' },
-    { id:  4, name: 'Fourth', desc: 'The last element' },
-    { id:  5, name: 'Fourth', desc: 'The last element' },
-    { id:  6, name: 'Fourth', desc: 'The last element' },
-    { id:  7, name: 'Fourth', desc: 'The last element' },
-    { id:  8, name: 'Fourth', desc: 'The last element' },
-    { id:  9, name: 'Fourth', desc: 'The last element' },
-    { id: 10, name: 'Fourth', desc: 'The last element' },
-    { id: 11, name: 'Fourth', desc: 'The last element' },
-    { id: 12, name: 'Fourth', desc: 'The last element' },
-    { id: 13, name: 'Fourth', desc: 'The last element' },
-    { id: 14, name: 'Fourth', desc: 'The last element' }
-  ];
+  var itemResource = $resource('/api/v1.0/items/:itemId', { itemId: '@id' });
 
-  $scope.openItemModal = function(selectedTask) {
-    $scope.task = selectedTask;
+  // Load items list
+  itemResource.get(function(data) {
+    if (!!data && data.hasOwnProperty('items')) {
+      $scope.itemList = angular.copy(data.items);
+    }
+  });
+
+  // Open add Item modal
+  $scope.openAddModal = function() {
+    $scope.task = 'add';
+    $scope.item = {};
+    openModal();
+  };
+
+  // Open edit Item modal
+  $scope.openEditModal = function(selectedItem) {
+    $scope.task = 'edit';
+    itemResource.get({ itemId: selectedItem.id }, function(data) {
+      $scope.item = angular.copy(data.item);
+      openModal();
+    });
+  };
+
+  function openModal() {
     $uibModal.open({
       size        : 'md',
       templateUrl : 'views/view1/item-modal.html',
       scope       : $scope,
-      controller  : function() {
+      controller  : function($scope, $uibModalInstance) {
+        "ngInject";
+
+        $scope.createNewItem = function() {
+          itemResource.save($scope.item, function(data) {
+            $scope.itemList.push(data.item);
+            $uibModalInstance.close();
+          });
+        };
+
+        $scope.saveItem = function() {
+          itemResource.save($scope.item, function(data) {
+            var listItem = $scope.itemList.getById(data.item.id);
+            if (listItem) {
+              angular.merge(listItem, data.item);
+            }
+            $uibModalInstance.close();
+          });
+        };
+
+        $scope.removeItem = function() {
+          itemResource.remove({ itemId: $scope.item.id }, function() {
+            $scope.itemList.removeById($scope.item.id);
+            $uibModalInstance.close();
+          });
+        };
 
       }
     });
-
-
-  };
+  }
 
 });
