@@ -12,7 +12,7 @@ angular.module('myApp.view1', ['ngRoute'])
 .controller('View1Ctrl', function($scope, $uibModal, $resource) {
   "ngInject";
 
-  var itemResource = $resource('/api/v1.0/items/:itemId', { itemId: '@id' });
+  var itemResource = $resource('/api/v1/items/:itemId', { itemId: '@id' });
 
   // Load items list
   itemResource.get(function(data) {

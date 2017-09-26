@@ -33,7 +33,9 @@
 <div class="modal-footer">
 
   <!--Remove-->
-  <button class="btn btn-icon btn-icon-delete" ng-show="task === 'edit'" ng-click="removeItem()">
+  <button class="btn btn-icon btn-icon-delete" ng-show="task === 'edit'"
+          ng-click="removeItem()"
+          confirm="Aro picha?">
     <span class="btn-text-section">Delete</span>
     <span class="btn-icon-section">
       <span class="glyphicon glyphicon-remove"></span>
