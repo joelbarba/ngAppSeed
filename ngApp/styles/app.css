@@ -7403,6 +7403,9 @@ ul.table-list > li.darkBg {
 ul.table-list > li.darkBg h4, ul.table-list > li.darkBg h5, ul.table-list > li.darkBg span {
   color: #FFFFFF;
 }
+ul.table-list > li.darkBg h4.sortable-col-header, ul.table-list > li.darkBg h5.sortable-col-header, ul.table-list > li.darkBg span.sortable-col-header {
+  cursor: pointer;
+}
 ul.table-list > li h4, ul.table-list > li h5, ul.table-list > li span {
   font-size: 15px;
   letter-spacing: 1px;

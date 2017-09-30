@@ -18,6 +18,9 @@ ul.table-list {
       border-top-right-radius: 3px;
       h4, h5, span {
         color: $primary_color_invert;
+        &.sortable-col-header {
+          cursor: pointer;
+        }
       }
     }
 

@@ -36,21 +36,23 @@
 
 
     </div>
-
     <div class="row">
       <div class="col-xs-12">
         <ul class="list-unstyled table-list">
 
           <li class="darkBg">
             <div class="row">
-              <!--ID-->   <div class="col-xs-2"> <span>ID</span> </div>
-              <!--Name--> <div class="col-xs-3"> <span>Name</span> </div>
-              <!--Desc--> <div class="col-xs-4"> <span>Description</span> </div>
+              <!--ID-->   <div class="col-xs-2" list-col-title title-text="ID"   field="id"   order-params="orderParams"></div>
+              <!--Name--> <div class="col-xs-3" list-col-title title-text="Name" field="name" order-params="orderParams"></div>
+              <!--Desc--> <div class="col-xs-4" list-col-title title-text="Description"></div>
             </div>
           </li>
 
-
-          <li class="btn-row" dir-paginate="item in itemList | filter: searchBox | itemsPerPage: 8" pagination-id="cust">
+          <li class="btn-row" pagination-id="paginationListId"
+              dir-paginate="item in itemList
+                            | filter: searchBox
+                            | orderBy: orderParams.orderByField: orderParams.reverseSort
+                            | itemsPerPage: 8">
             <div class="row">
               <div class="col-xs-2 row-text"><span>{{item.id}}</span></div>
               <div class="col-xs-3 row-text"><span>{{item.name}}</span></div>
@@ -72,7 +74,7 @@
       </div>
 
       <div class="col-xs-12">
-        <dir-pagination-controls pagination-id="cust"></dir-pagination-controls>
+        <dir-pagination-controls pagination-id="paginationListId"></dir-pagination-controls>
       </div>
 
     </div>
