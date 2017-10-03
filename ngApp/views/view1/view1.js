@@ -12,27 +12,28 @@ angular.module('myApp.view1', ['ngRoute'])
 .controller('View1Ctrl', function($scope, $uibModal, $resource) {
   "ngInject";
 
-  var itemResource = $resource('/api/v1/items/:itemId', { itemId: '@id' });
+  var tasksResource = $resource('/api/v1/tasks/:taskId', { taskId: '@id' });
 
-  // Load items list
-  itemResource.get(function(data) {
-    if (!!data && data.hasOwnProperty('items')) {
-      $scope.itemList = angular.copy(data.items);
+
+  // Load tasks list
+  tasksResource.get(function(data) {
+    if (!!data && data.hasOwnProperty('tasks')) {
+      $scope.tasksList = angular.copy(data.tasks);
     }
   });
 
-  // Open add Item modal
+  // Open add Task modal
   $scope.openAddModal = function() {
     $scope.task = 'add';
     $scope.item = {};
     openModal();
   };
 
-  // Open edit Item modal
+  // Open edit Task modal
   $scope.openEditModal = function(selectedItem) {
     $scope.task = 'edit';
-    itemResource.get({ itemId: selectedItem.id }, function(data) {
-      $scope.item = angular.copy(data.item);
+    tasksResource.get({ taskId: selectedItem.id }, function(data) {
+      $scope.item = angular.copy(data.task);
       openModal();
     });
   };
@@ -46,25 +47,26 @@ angular.module('myApp.view1', ['ngRoute'])
         "ngInject";
 
         $scope.createNewItem = function() {
-          itemResource.save($scope.item, function(data) {
-            $scope.itemList.push(data.item);
+          tasksResource.save($scope.item, function(data) {
+            $scope.tasksList.push(data.task);
             $uibModalInstance.close();
           });
         };
 
         $scope.saveItem = function() {
-          itemResource.save($scope.item, function(data) {
-            var listItem = $scope.itemList.getById(data.item.id);
+          delete $scope.item.done;
+          tasksResource.save($scope.item, function(data) {
+            var listItem = $scope.tasksList.getById(data.task.id);
             if (listItem) {
-              angular.merge(listItem, data.item);
+              angular.merge(listItem, data.task);
             }
             $uibModalInstance.close();
           });
         };
 
         $scope.removeItem = function() {
-          itemResource.remove({ itemId: $scope.item.id }, function() {
-            $scope.itemList.removeById($scope.item.id);
+          tasksResource.remove({ taskId: $scope.item.id }, function() {
+            $scope.tasksList.removeById($scope.item.id);
             $uibModalInstance.close();
           });
         };

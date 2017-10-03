@@ -11,19 +11,19 @@
       <!--ID-->
       <div class="col-md-5 form-group" ng-show="task === 'edit'">
         <label for="idInputItem">Id</label>
-        <input type="number" class="form-control" id="idInputItem" ng-disabled="true" ng-model="item.id">
+        <input type="text" class="form-control" id="idInputItem" ng-disabled="true" ng-model="item.id">
       </div>
 
-      <!--Name-->
+      <!--Title-->
       <div class="col-md-7 form-group">
-        <label for="nameInputItem">Name</label>
-        <input type="text" class="form-control" id="nameInputItem" placeholder="Item Name" ng-model="item.name">
+        <label for="nameInputItem">Title</label>
+        <input type="text" class="form-control" id="nameInputItem" placeholder="Item Name" ng-model="item.title">
       </div>
 
       <!--Description-->
       <div class="col-md-12 form-group">
         <label for="descInputItem">Description</label>
-        <input type="text" class="form-control" id="descInputItem" placeholder="..." ng-model="item.desc">
+        <input type="text" class="form-control" id="descInputItem" placeholder="..." ng-model="item.description">
       </div>
 
     </form>
@@ -35,7 +35,7 @@
   <!--Remove-->
   <button class="btn btn-icon btn-icon-delete" ng-show="task === 'edit'"
           ng-click="removeItem()"
-          confirm="Aro picha?">
+          confirm="Do you want to delete {{item.title}}?">
     <span class="btn-text-section">Delete</span>
     <span class="btn-icon-section">
       <span class="glyphicon glyphicon-remove"></span>
