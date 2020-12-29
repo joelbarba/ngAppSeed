@@ -1,0 +1,76 @@
+$bar-bg: #d4d4d4;
+$bar-color: #004A64;
+$locker-bg: #282828;
+
+// Animation inspired by the Material Indeterminate bar:
+// https://material.angular.io/components/progress-bar/overview
+.bf-loading-bar {
+  position: fixed;
+  left: 0;
+  top: 70px;
+  height: 4px;
+  z-index: 9100;
+  &.bar-bg {
+    right: 0;
+    background: $bar-bg;
+  }
+
+  &.bar-1, &.bar-2 {
+    background: linear-gradient(to left, transparent 0%, $bar-color 15%, $bar-color 85%, transparent 100%);
+    width: calc(65vw);
+    animation-duration: 1s;
+    animation-iteration-count: infinite;
+    animation-timing-function: cubic-bezier(0.25, 0.74, 0.79, 0.32);
+    animation-name: loading-bar-ani-trans;
+    @keyframes loading-bar-ani-trans {
+      0%    { transform: translateX(calc(0px - 65vw)); }
+      100%  { transform: translateX(calc(120vw)); }
+    }
+
+    transform-origin: left;
+    //animation-play-state: paused;
+  }
+  //&.bar-2 {
+  //  animation-delay: 600ms;
+  //  width: calc(30vw);
+  //}
+}
+
+// Element to block the whole background while loading
+.bf-loading-bg-blocker {
+  position: fixed;
+  left: 0; top: 0; right: 0; bottom: 0;
+  z-index: 9200;
+  background: $locker-bg;
+  opacity: 0.5;
+}
+
+// Circular spinner running in the middle of the screen
+$spinner-size: 60;
+$menu-size: 35;
+.bf-spinner {
+  position: fixed;
+  width: calc(#{$spinner-size}px + 2px);
+  height: calc(#{$spinner-size}px + 2px);
+  left: calc(50% - calc(#{$spinner-size}px / 2) + #{$menu-size}px);
+  top: calc(50% - calc(#{$spinner-size}px / 2));
+  border: 7px solid white;
+  animation-name: spinAround;
+  animation-iteration-count: infinite;
+  animation-duration: 500ms;
+  animation-timing-function: linear;
+}
+.bf-spinner-inner {
+  position: absolute;
+  left: -6px;
+  top: -6px;
+  width: #{$spinner-size}px;
+  height: #{$spinner-size}px;
+  border: 5px solid #607D8B;
+}
+.bf-spinner, .bf-spinner-inner {
+  border-radius: 100%;
+  z-index: 9100;
+  border-top-color: transparent;
+  border-left-color: transparent;
+}

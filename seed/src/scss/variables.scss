@@ -1,0 +1,56 @@
+/* Main color palette */
+
+$primary_color    : #00B6F1;
+$secondary_color  : #93C83E;
+$tertiary_color   : #ED0677;
+$quaternary_color : #004A64;
+$warning_color    : #ED0677;
+$extra_color      : #F17B3F;
+
+$white: #FFF;
+$menu-bg: #d4d4d4;
+$disabled-color: #a0a0a0;
+
+$error-color: $tertiary_color;
+$success-color: $primary_color;
+
+
+/* Bootstrap theme overwritting */
+$primary:       $primary_color;
+$secondary:     $secondary_color;
+$success:       $primary_color;
+$info:          $quaternary_color;
+$warning:       $extra_color;
+$danger:        $warning_color;
+$light:         $primary_color;
+$dark:          $primary_color;
+
+$navbar-dark-color:                 $white;
+$navbar-dark-hover-color:           rgba($white, .75);
+$navbar-dark-active-color:          rgba($white, .80);
+$navbar-dark-disabled-color:        rgba($white, .25);
+
+$navbar-dark-brand-color:           $primary_color;
+$navbar-dark-brand-hover-color:     $white;
+
+$popover-bg: #17495B;
+
+
+// Define CSS variables (IEexplorer does not support this)
+$bf-colors: (
+  "primary"     : $primary_color,
+  "secondary"   : $secondary_color,  
+  "tertiary"    : $tertiary_color,   
+  "quaternary"  : $quaternary_color, 
+  "warning"     : $warning_color,    
+  "extra"       : $extra_color,      
+  "white"       : $white,
+);
+:root {
+  @each $color, $value in $bf-colors {
+    --#{$color}: #{$value};
+    .#{$color}-text { color: #{$value}; }
+    .text-#{$color} { color: #{$value}; }
+    .#{$color} { color: #{$value}; }
+  }
+}
