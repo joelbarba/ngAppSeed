@@ -1,14 +1,34 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { NavbarComponent } from './navbar/navbar.component';
-import { MenuComponent } from './menu/menu.component';
-import { FooterComponent } from './footer/footer.component';
-import { RouterModule } from '@angular/router';
-import { LoadingBarComponent } from './loading-bar/loading-bar.component';
+import {CUSTOM_ELEMENTS_SCHEMA, NgModule} from '@angular/core';
+import {NavbarComponent} from './navbar/navbar.component';
+import {MenuComponent} from './menu/menu.component';
+import {FooterComponent} from './footer/footer.component';
+import {CoreModule} from 'src/app/core/core.module';
+import {PageNotFoundComponent} from './page-not-found/page-not-found.component';
+import {LoginModule} from '../pages/login/login.module';
+import {HomeModule} from '../pages/home/home.module';
+
 
 @NgModule({
-  declarations: [NavbarComponent, MenuComponent, FooterComponent, LoadingBarComponent],
-  imports: [CommonModule, RouterModule],
-  exports: [NavbarComponent, MenuComponent, FooterComponent, LoadingBarComponent],
+  declarations: [
+    NavbarComponent,
+    MenuComponent,
+    FooterComponent,
+    PageNotFoundComponent,
+  ],
+  imports: [
+    CoreModule,
+
+    // Static pages (not lazy loaded)
+    LoginModule,
+    HomeModule,
+  ],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  exports: [
+    NavbarComponent,
+    MenuComponent,
+    FooterComponent,
+    LoginModule,
+    HomeModule,
+  ],
 })
 export class ShellModule { }

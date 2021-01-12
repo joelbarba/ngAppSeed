@@ -1,9 +1,12 @@
-@import "scss/variables.scss";
-@import "~bootstrap/dist/css/bootstrap.css";
-@import "scss/color-layer.scss";
-@import "~bf-icomoon/css/icomoon.css";
+@import "scss/config/variables";
+@import '~jb-ui-lib/scss/index';
+@import "~jb-icomoon/css/icomoon.css";
+@import "~bootstrap/scss/bootstrap.scss";
 @import "scss/globals.scss";
+@import "scss/jb-ui-lib.scss";
 @import "scss/helpers.scss";
 @import "scss/layout.scss";
+@import "scss/modals.scss";
+@import "scss/tooltips.scss";
 @import "scss/lists.scss";
-@import "scss/popover.scss";
+

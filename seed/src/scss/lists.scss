@@ -1,77 +1,101 @@
+$list-header-color: $white;
+$list-header-bg: $primary_color;
+$list-pijama-bg: $primary_color;
+
 ul.table-list {
+  background-color: $white;
   box-shadow: 0 1px 2px rgba(34, 36, 38, 0.15);
-  background: $white;
+  margin-bottom: 0;
+  padding-left: 0;
+  list-style: none;
+
+  flex: 0 0 100%;
+  max-width: 100%;
+  li.list-header, li.list-row  {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+
   li.list-header {
-    background: $primary_color;
-    color: $white;
+    width: 100%;
+    padding: 7px 10px 8px;  // 8.5px -> pull half pixel up
+    word-break: break-word;
+    background: $list-header-bg;
+    color: $list-header-color;
     border-top-right-radius: 3px;
     border-top-left-radius: 3px;
-    width: 100%;
-    padding: 10px 15px;
-    word-break: break-word;
-    h4 {
-      color: $white;
-      font-size: 16px;
+
+    .list-header-col-title {
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1;
       letter-spacing: 1px;
-      margin-bottom: 0;
-      cursor: pointer;
     }
   }
   li.list-row {
     width: 100%;
-    padding: 5px 15px;
+    min-height: 48px; padding: 7.5px 10px;
     word-break: break-word;
-    &:nth-child(even) {
-      background: rgba($primary_color, 0.08);
-    }
-    &:nth-child(odd) {
-      background: $white;
-    }
-    // border-top: 1px solid $white;
+    &:nth-child(even) { background: rgba($list-pijama-bg, 0.08); }
+    &:nth-child(odd) { background: $white; }
 
-    h5 {
-      font-size: 16px;
-      letter-spacing: 1px;
-      margin-top: 7.5px;
-      margin-bottom: 0;
-    }
+    [class*="col-"] {
+      align-items: center;
+      display: flex;
+      &.text-right { justify-content: flex-end; } // emulate text-align classes
 
-    // Change rows background on hovering
-    &.hover-bg {
-      cursor: pointer;
-      &:hover, &:hover:nth-child(even), &:hover:nth-child(odd) {
-        background: rgba($primary_color, 0.2);
+      font-size: 14px;
+      font-weight: normal; // 500;
+      line-height: normal;
+      //line-height: 1;
+      //letter-spacing: 1px;
+    }
+    [class*="col-"].ellipsis { display: inline; } // For just text cols with ellipsis overflow
+    jb-status-badge[class*="col-"] { line-height: $line-height-base; } // @Todo: make status badge height independent of the line height
+
+    // Default style for collapsible mobile label/value
+    .mobile-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 0 0 10px;
+      > :nth-child(1) { font-weight: bold; }
+    }
+  }
+
+  // Switch from the regular columns (MD,LG) to jb-mobile-list (XS,SM)
+  li.list-row {
+    @media (max-width: 991px) { jb-mobile-list-row ~ [class*="col-"] { display: none; }}
+    @media (min-width: 992px) { jb-mobile-list-row { display: none; }}
+  }
+  li.list-header {
+    jb-list-header-col.mobile { @extend .col-12 }
+    jb-list-header-col.text-right {
+      .list-header-col-title {
+        justify-content: flex-end;
       }
     }
+    @media (max-width: 991px) { jb-list-header-col.mobile ~ jb-list-header-col { display: none; }}
+    @media (min-width: 992px) { jb-list-header-col.mobile { display: none; }}
+  }
 
-    // If we need to apply the styles to an inner element (immediate child of list-row)
-    & > .inner-list-row {
-      margin: -5px -15px;
-      padding: 5px 0;
-      &.hover-bg {
-        cursor: pointer;
-        &:hover, &:hover:nth-child(even), &:hover:nth-child(odd) {
-          background: rgba($primary_color, 0.2);
-        }
-      }
-      // To highlight a selected row
-      &.selected-row {
-        background: rgba($primary_color, 0.35);
-      }
+}
+
+@media (max-width: 991px) { // equivalent of "jb-list-paginator.mobile" for XS, SM
+  jb-list-paginator.mobile-sm .jb-list-paginator {
+    width: 100%;
+    flex-wrap: wrap;
+    .page-buttons {
+      width: 100%;
+      display: flex;
+      .page-btn { flex: 1; min-width: 20px; }
     }
-
+    .page-num-selector {
+      flex: 1 0 100%;
+      margin-top: 10px;
+      padding-left: 0;
+      jb-dropdown .jb-dropdown-form-group { width: 100%; }
+    }
   }
 }
-
-.whiteBg {
-  padding: 15px;
-  margin: 10px 0;
-  box-shadow: 0 1px 2px rgba(34, 36, 38, 0.15);
-  background-color: #FFFFFF;
-  // border: 2px solid #e8e8e8;
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
-}
-
-

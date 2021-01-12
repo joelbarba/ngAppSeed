@@ -1,15 +1,9 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { LoginComponent } from './login.component';
-import { GlobalsModule } from 'src/app/globals/globals.module';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
+import {NgModule} from '@angular/core';
+import {LoginComponent} from './login.component';
+import {CoreModule} from 'src/app/core/core.module';
 
 @NgModule({
   declarations: [LoginComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    GlobalsModule,
-  ]
+  imports: [CoreModule]
 })
 export class LoginModule { }

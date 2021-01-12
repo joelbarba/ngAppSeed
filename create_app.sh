@@ -3,77 +3,62 @@
 seedFolder=`pwd`
 
 echo ""
+#echo "Current version of Angular CLI (to create the new app):"
+#ng --version
 echo ""
-echo "Current version of Angular CLI (to create the new app):"
-ng --version
-echo ""
-echo "Type the name (camelCase) of the new app (will be placed at ~/BLUEFACE/ALEXIA/)"
+echo "Type the name (camelCase) of the new app:"
 read newAppName
-cd ~/BLUEFACE/ALEXIA/
-ng new $newAppName --prefix=prefix --routing=true --style=scss --verbose=true
+
+rootFolder="/home/barba/DEV"
+echo ""
+echo "Folder of the app? ($rootFolder) (A new folder for the app will be created inside)"
+read rootFolder
+if [ "$rootFolder" = "" ]; then
+    rootFolder="/home/barba/DEV"
+fi
+cd $rootFolder
+ng new $newAppName --prefix=jb --routing=true --style=scss --verbose=true
 cd $newAppName
 
 echo ""
-echo "----------------------------------------------------------"
-echo "  - Create Basic app folder structure:"
-echo "    ├ SCSS"
-echo "    │  ├ color-layer.scss"
-echo "    │  ├ globals.scss"
-echo "    │  ├ helpers.scss"
-echo "    │  ├ layout.scss"
-echo "    │  ├ popover.scss"
-echo "    │  └ variables.scss"
-echo "    │"
-echo "    └ APP"
-echo "       ├ GLOBALS"
-echo "       │  ├ globals.module.ts"
-echo "       │  ├ bfPromise.ts"
-echo "       │  ├ listHandler.ts"
-echo "       │  ├ prototypes.ts"
-echo "       │  ├ asyncField.pipe.ts"
-echo "       │  ├ translate.service.ts"
-echo "       │  ├ globals.service.ts"
-echo "       │  └ profile.service.ts"
-echo "       │"
-echo "       ├ SHELL"
-echo "       │  ├ shell.module.ts"
-echo "       │  ├ MENU   (C)"
-echo "       │  ├ NAVBAR (C)"
-echo "       │  └ FOOTER (C)"
-echo "       └ PAGES"
-echo "          ├ LOGIN (M + C)"
-echo "          └ HOME  (M + C)"
-echo ""
-
-cp $seedFolder/seed/new_page.sh  ./
-cp $seedFolder/seed/src/styles.scss  src/styles.scss
-cp -r $seedFolder/seed/src/scss src
-cp -r $seedFolder/seed/src/app/ src
+echo "Copy seed template"
+rm -rf ./src
+cp -rf $seedFolder/seed/src ./
 
 echo ""
-echo "Install the following dependencies:"
-echo "  1. Bootstrap 4   (https://getbootstrap.com/docs/4.3)"
-echo "  2. IcoMoon       (https://www.npmjs.com/package/bf-icomoon)"
-echo "  3. Ng Bootstrap  (https://github.com/ng-bootstrap/ng-bootstrap)"
-echo "  4. bf-ui-lib"
-echo ""
-echo "------------------------------------------------"
-npm install bootstrap@4  --save
-npm install bf-icomoon --save
-npm install --save @ng-bootstrap/ng-bootstrap
-npm install bf-ui-lib
+echo "Copy scripts"
+cp -rf $seedFolder/seed/new_page.sh ./
 
-echo "" > .gitmessage.txt
+echo ""
+echo 'Adding to angular.json (projects.app.architect.build.options) --> "stylePreprocessorOptions": { "includePaths": ["src/scss/config"] },'
+sed -i '25i          "stylePreprocessorOptions": { "includePaths": ["src/scss/config"] },' angular.json
+
+echo ""
+echo "Install npm dependencies"
+npm i jb-icomoon
+npm i jb-ui-lib
+npm i bootstrap@4
+npm i @ng-bootstrap/ng-bootstrap
+npm i @ngxs/store
+npm i @ngx-translate/core
+npm i ng5-slider
+npm i popper.js
+npm i jquery
+
+npm i subsink
+npm i @ngxs-labs/select-snapshot
+npm i @ngxs/devtools-plugin
+
 git add -A
-git commit -m 'Application file structure + basic dependencies (through ngSeed)'
+git commit -m 'App init from ngAppSeed'
 
 echo ""
-echo "App ready at ----> ~/BLUEFACE/ALEXIA/$newAppName"
-echo "App successfully created."
+echo "App ready at ----> $rootFolder / $newAppName"
 echo ""
-echo "Running the server..."
-echo ""
-ng serve --open
+
+mate-terminal --working-directory=$rootFolder/$newAppName
+
+
 
 
 

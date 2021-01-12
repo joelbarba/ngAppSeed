@@ -1,16 +1,11 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { HomeComponent } from './home.component';
-import { GlobalsModule } from 'src/app/globals/globals.module';
-import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
-
+import {NgModule} from '@angular/core';
+import {HomeComponent} from './home.component';
+import {CoreModule} from 'src/app/core/core.module';
 
 @NgModule({
   declarations: [HomeComponent],
-  imports: [
-    CommonModule,
-    FormsModule,
-    GlobalsModule,
-  ]
+  imports: [CoreModule]
 })
 export class HomeModule { }
+
+
